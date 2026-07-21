@@ -1,0 +1,17 @@
+{
+  "hotelName": "HotelAI Demo Hotel",
+
+  "checkIn": "15:00",
+
+  "checkOut": "11:00",
+
+  "breakfast": "07:00 bis 10:30",
+
+  "parking": "Kostenlos",
+
+  "dogs": "Ja",
+
+  "spa": "07:00 bis 21:00",
+
+  "restaurant": "12:00 bis 22:00"
+}

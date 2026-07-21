@@ -1,9 +1,40 @@
+import { useState } from "react";
 import Header from "./components/Header";
 
 
 function App() {
 
+    const [message, setMessage] = useState("");
+    const [response, setResponse] = useState("");
+
+
+    async function generateAnswer() {
+
+        const result = await fetch(
+            "http://localhost:3000/api/chat",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    message: message
+                })
+            }
+        );
+
+
+        const data = await result.json();
+
+        setResponse(data.reply);
+
+    }
+
+
     return (
+
         <div className="container">
 
             <Header />
@@ -15,15 +46,22 @@ function App() {
                     Gästeanfrage
                 </h2>
 
-                <textarea 
+
+                <textarea
+                    value={message}
+                    onChange={(e) =>
+                        setMessage(e.target.value)
+                    }
                     placeholder="Nachricht vom Gast einfügen..."
                 />
 
-                <button>
+
+                <button onClick={generateAnswer}>
                     ✨ Antwort generieren
                 </button>
 
             </div>
+
 
 
             <div className="card">
@@ -32,15 +70,20 @@ function App() {
                     KI Antwort
                 </h2>
 
-                <textarea 
-                    placeholder="Die KI Antwort erscheint hier..."
+
+                <textarea
+                    value={response}
                     readOnly
                 />
 
             </div>
 
+
         </div>
+
     );
+
 }
+
 
 export default App;
