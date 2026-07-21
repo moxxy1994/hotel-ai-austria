@@ -1,0 +1,56 @@
+{
+  "hotelName": "Hotel Sonnenblick",
+  "description": "Ein modernes Wellnesshotel im Burgenland.",
+
+  "address": {
+    "city": "Oberwart",
+    "country": "Austria"
+  },
+
+  "contact": {
+    "phone": "+43 000 000000",
+    "email": "info@hotel-sonnenblick.at"
+  },
+
+  "checkIn": {
+    "time": "15:00 Uhr",
+    "earlyCheckIn": "Nach Verfügbarkeit möglich"
+  },
+
+  "checkOut": {
+    "time": "11:00 Uhr",
+    "lateCheckOut": "Nach Anfrage möglich"
+  },
+
+  "breakfast": {
+    "time": "07:00 - 10:30 Uhr",
+    "included": true
+  },
+
+  "parking": {
+    "available": true,
+    "information": "Kostenlose Parkplätze direkt beim Hotel."
+  },
+
+  "pets": {
+    "allowed": true,
+    "price": "15 Euro pro Nacht"
+  },
+
+  "wellness": {
+    "available": true,
+    "openingHours": "07:00 - 21:00 Uhr"
+  },
+
+  "restaurant": {
+    "available": true,
+    "openingHours": "12:00 - 22:00 Uhr"
+  },
+
+  "languages": [
+    "Deutsch",
+    "Englisch",
+    "Ungarisch",
+    "Kroatisch"
+  ]
+}
