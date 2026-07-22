@@ -3,6 +3,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import ChatWindow from "./components/ChatWindow";
 import MessageInput from "./components/MessageInput";
+import HotelSidebar from "./components/HotelSidebar";
 
 
 function App() {
@@ -114,74 +115,93 @@ function App() {
 
 
 
-            <div className="card">
+            <div className="dashboard">
 
 
-                <label>
-
-                    Antwortstil
-
-                </label>
+                <HotelSidebar />
 
 
 
-                <select
-
-                    value={style}
-
-                    onChange={(e) =>
-                        setStyle(e.target.value)
-                    }
-
-                >
-
-                    <option value="freundlich">
-                        😊 Freundlich
-                    </option>
-
-
-                    <option value="elegant">
-                        🏨 Elegant
-                    </option>
-
-
-                    <option value="luxus">
-                        ⭐ Luxus
-                    </option>
-
-
-                    <option value="locker">
-                        😎 Locker
-                    </option>
-
-
-                </select>
-
-
-            </div>
+                <div className="chat-area">
 
 
 
-
-            <div className="card">
-
-
-                <ChatWindow
-
-                    messages={messages}
-
-                />
+                    <div className="card">
 
 
-                <MessageInput
+                        <label>
 
-                    message={message}
+                            Antwortstil
 
-                    setMessage={setMessage}
+                        </label>
 
-                    sendMessage={sendMessage}
 
-                />
+
+                        <select
+
+                            value={style}
+
+                            onChange={(e) =>
+                                setStyle(e.target.value)
+                            }
+
+                        >
+
+                            <option value="freundlich">
+                                😊 Freundlich
+                            </option>
+
+
+                            <option value="elegant">
+                                🏨 Elegant
+                            </option>
+
+
+                            <option value="luxus">
+                                ⭐ Luxus
+                            </option>
+
+
+                            <option value="locker">
+                                😎 Locker
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+
+
+                    <div className="card">
+
+
+                        <ChatWindow
+
+                            messages={messages}
+
+                        />
+
+
+
+                        <MessageInput
+
+                            message={message}
+
+                            setMessage={setMessage}
+
+                            sendMessage={sendMessage}
+
+                        />
+
+
+                    </div>
+
+
+
+                </div>
 
 
             </div>
