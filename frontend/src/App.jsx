@@ -1,12 +1,11 @@
 import { useState } from "react";
 import Header from "./components/Header";
 
-
 function App() {
 
     const [message, setMessage] = useState("");
     const [response, setResponse] = useState("");
-
+    const [style, setStyle] = useState("freundlich");
 
     async function generateAnswer() {
 
@@ -20,11 +19,11 @@ function App() {
                 },
 
                 body: JSON.stringify({
-                    message: message
+                    message: message,
+                    style: style
                 })
             }
         );
-
 
         const data = await result.json();
 
@@ -32,20 +31,27 @@ function App() {
 
     }
 
-
     return (
 
         <div className="container">
 
             <Header />
 
-
             <div className="card">
 
-                <h2>
-                    Gästeanfrage
-                </h2>
+                <h2>Gästeanfrage</h2>
 
+                <label>Antwortstil</label>
+
+                <select
+                    value={style}
+                    onChange={(e) => setStyle(e.target.value)}
+                >
+                    <option value="freundlich">😊 Freundlich</option>
+                    <option value="elegant">🏨 Elegant</option>
+                    <option value="luxus">⭐ Luxus</option>
+                    <option value="locker">😎 Locker</option>
+                </select>
 
                 <textarea
                     value={message}
@@ -55,21 +61,15 @@ function App() {
                     placeholder="Nachricht vom Gast einfügen..."
                 />
 
-
                 <button onClick={generateAnswer}>
                     ✨ Antwort generieren
                 </button>
 
             </div>
 
-
-
             <div className="card">
 
-                <h2>
-                    KI Antwort
-                </h2>
-
+                <h2>KI Antwort</h2>
 
                 <textarea
                     value={response}
@@ -78,12 +78,10 @@ function App() {
 
             </div>
 
-
         </div>
 
     );
 
 }
-
 
 export default App;
