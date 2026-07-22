@@ -1,4 +1,59 @@
+import { useEffect, useState } from "react";
+
+
 function HotelSidebar() {
+
+
+    const [hotel, setHotel] = useState(null);
+
+
+
+    useEffect(() => {
+
+
+        async function loadHotel() {
+
+
+            const result = await fetch(
+
+                "http://localhost:3000/api/hotels/001"
+
+            );
+
+
+            const data = await result.json();
+
+
+            setHotel(data);
+
+
+        }
+
+
+        loadHotel();
+
+
+    }, []);
+
+
+
+    if (!hotel) {
+
+
+        return (
+
+            <aside className="hotel-sidebar">
+
+                <p>
+                    Hotelinformationen werden geladen...
+                </p>
+
+            </aside>
+
+        );
+
+    }
+
 
 
     return (
@@ -7,12 +62,17 @@ function HotelSidebar() {
 
 
             <h2>
-                🏨 Hotel Sonnenblick
+
+                🏨 {hotel.hotelName}
+
             </h2>
 
 
+
             <p>
-                Modernes Wellnesshotel im Burgenland
+
+                {hotel.description}
+
             </p>
 
 
@@ -22,74 +82,114 @@ function HotelSidebar() {
 
 
             <h3>
+
                 📍 Standort
+
             </h3>
 
+
             <p>
-                Oberwart, Austria
+
+                {hotel.address.city}, {hotel.address.country}
+
             </p>
 
 
 
             <h3>
+
                 🕒 Check-in
+
             </h3>
 
+
             <p>
-                Ab 15:00 Uhr
+
+                Ab {hotel.checkIn.time}
+
             </p>
 
 
 
             <h3>
+
                 🚪 Check-out
+
             </h3>
 
+
             <p>
-                Bis 11:00 Uhr
+
+                Bis {hotel.checkOut.time}
+
             </p>
 
 
 
             <h3>
+
                 🍳 Frühstück
+
             </h3>
 
+
             <p>
-                07:00 - 10:30 Uhr
+
+                {hotel.breakfast.time}
+
             </p>
 
 
 
             <h3>
+
                 🚗 Parkplatz
+
             </h3>
 
+
             <p>
-                ✅ Kostenlose Parkplätze
+
+                {hotel.parking.available
+                    ? "✅ " + hotel.parking.information
+                    : "❌ Kein Parkplatz vorhanden"
+                }
+
             </p>
 
 
 
             <h3>
+
                 🐕 Haustiere
+
             </h3>
 
+
             <p>
-                ✅ Erlaubt
-                <br />
-                15 € pro Nacht
+
+                {hotel.pets.allowed
+                    ? `✅ Erlaubt (${hotel.pets.price})`
+                    : "❌ Nicht erlaubt"
+                }
+
             </p>
 
 
 
             <h3>
+
                 🧖 Wellness
+
             </h3>
 
+
             <p>
-                07:00 - 21:00 Uhr
+
+                {hotel.wellness.openingHours}
+
             </p>
+
 
 
         </aside>
