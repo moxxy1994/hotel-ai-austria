@@ -1,211 +1,255 @@
-import {useState} from "react";
-
+import { useState } from "react";
+import AdminPanel from "./components/AdminPanel";
 import Header from "./components/Header";
 import ChatWindow from "./components/ChatWindow";
 import MessageInput from "./components/MessageInput";
 import HotelSidebar from "./components/HotelSidebar";
-import HotelSelector from "./components/HotelSelector";
+import QuickActions from "./components/QuickActions";
+import ExportChatButton from "./components/ExportChatButton";
 
 
-function App(){
+function App() {
 
 
-const [message,setMessage]=useState("");
+    const [message, setMessage] = useState("");
 
-const [messages,setMessages]=useState([]);
+    const [messages, setMessages] = useState([]);
 
-const [style,setStyle]=useState("freundlich");
+    const [style, setStyle] = useState("freundlich");
 
-const [hotelId,setHotelId]=useState("001");
+    const [hotelId, setHotelId] = useState("001");
 
 
 
-async function sendMessage(){
+    async function sendMessage(text = message) {
 
 
-if(!message.trim()) return;
+        if (!text.trim()) {
+            return;
+        }
 
 
 
-const result=await fetch(
+        const guestMessage = {
 
-"http://localhost:3000/api/chat",
+            role: "guest",
 
-{
+            text: text
 
-method:"POST",
+        };
 
-headers:{
 
-"Content-Type":"application/json"
 
-},
+        setMessages((oldMessages)=>[
 
-body:JSON.stringify({
+            ...oldMessages,
 
-message:message,
+            guestMessage
 
-style:style,
+        ]);
 
-hotelId:hotelId
 
-})
 
-}
 
-);
+        const result = await fetch(
 
+            "http://localhost:3000/api/chat",
 
+            {
 
-const data=await result.json();
+                method:"POST",
 
+                headers:{
 
+                    "Content-Type":"application/json"
 
-setMessages(old=>[
+                },
 
-...old,
+                body:JSON.stringify({
 
-{
+                    message:text,
 
-role:"ai",
+                    hotelId:hotelId,
 
-text:data.reply
+                    style:style
 
-}
+                })
 
-]);
+            }
 
+        );
 
 
-setMessage("");
 
-}
+        const data = await result.json();
 
 
 
 
-return(
+        const aiMessage = {
 
-<div className="container">
+    role:"ai",
 
+    text:data.reply,
 
-<Header/>
+    category:data.category,
 
+    status:data.status
 
-<div className="dashboard">
+};
 
 
-<div>
 
+        setMessages((oldMessages)=>[
 
-<HotelSelector
+            ...oldMessages,
 
-hotelId={hotelId}
+            aiMessage
 
-setHotelId={setHotelId}
+        ]);
 
-/>
 
 
+        setMessage("");
 
-<HotelSidebar
+    }
 
-hotelId={hotelId}
 
-/>
 
+    function sendQuickMessage(text){
 
-</div>
+        sendMessage(text);
 
+    }
 
 
-<div className="chat-area">
 
 
-<div className="card">
+    return (
 
+        <div className="container">
 
-<label>
 
-Antwortstil
+            <Header />
 
-</label>
 
 
-<select
+            <div className="dashboard">
 
-value={style}
 
-onChange={(e)=>
+                <HotelSidebar
 
-setStyle(e.target.value)
+                    hotelId={hotelId}
 
-}
+                />
 
->
 
 
-<option value="freundlich">
-😊 Freundlich
-</option>
+                <div className="chat-area">
 
 
-<option value="elegant">
-🏨 Elegant
-</option>
 
+                    <div className="card">
 
-<option value="luxus">
-⭐ Luxus
-</option>
 
+                        <label>
+                            Antwortstil
+                        </label>
 
-<option value="locker">
-😎 Locker
-</option>
 
 
-</select>
+                        <select
 
+                            value={style}
 
-</div>
+                            onChange={(e)=>
+                                setStyle(e.target.value)
+                            }
 
+                        >
 
-<div className="card">
+                            <option value="freundlich">
+                                😊 Freundlich
+                            </option>
 
+                            <option value="elegant">
+                                🏨 Elegant
+                            </option>
 
-<ChatWindow
+                            <option value="luxus">
+                                ⭐ Luxus
+                            </option>
 
-messages={messages}
+                            <option value="locker">
+                                😎 Locker
+                            </option>
 
-/>
 
+                        </select>
 
 
-<MessageInput
+                    </div>
 
-message={message}
 
-setMessage={setMessage}
 
-sendMessage={sendMessage}
+                    <QuickActions
 
-/>
+                        sendQuickMessage={
+                            sendQuickMessage
+                        }
 
+                    />
 
-</div>
 
 
-</div>
+                    <div className="card">
 
 
-</div>
+                        <ChatWindow
 
+                            messages={messages}
 
-</div>
+                        />
 
-);
 
+
+                        <MessageInput
+
+                            message={message}
+
+                            setMessage={setMessage}
+
+                            sendMessage={()=>
+                                sendMessage()
+                            }
+
+                        />
+
+
+                    </div>
+
+
+
+                    <ExportChatButton
+
+                        messages={messages}
+
+                        hotelId={hotelId}
+
+                        
+
+                    />
+                    <AdminPanel />
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    );
 
 }
 

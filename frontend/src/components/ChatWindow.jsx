@@ -1,36 +1,103 @@
-function ChatWindow({ messages }) {
+function ChatWindow({messages}) {
+
+
+    function getStatusText(status){
+
+
+        if(status === "mitarbeiter"){
+
+            return "🔴 Mitarbeiter übernehmen";
+
+        }
+
+
+        return "🟢 Automatische Antwort";
+
+    }
+
+
+
 
     return (
 
         <div className="chat-window">
 
-            {messages.map((message, index) => (
 
-                <div
-                    key={index}
-                    className={`message ${message.role}`}
-                >
+            {
+                messages.map((msg,index)=>(
 
-                    <strong>
-                        {message.role === "guest"
-                            ? "Gast:"
-                            : "HotelAI:"
+
+                    <div
+
+                        key={index}
+
+                        className={
+                            msg.role === "guest"
+                            ?
+                            "message guest"
+                            :
+                            "message ai"
                         }
-                    </strong>
+
+                    >
 
 
-                    <p>
-                        {message.text}
-                    </p>
+                        {
+                            msg.role === "ai" && msg.category &&
 
-                </div>
+                            <div className="category">
 
-            ))}
+                                🏷️ {msg.category}
+
+                            </div>
+
+                        }
+
+
+
+                        {
+                            msg.role === "ai" && msg.status &&
+
+                            <div
+
+                                className={
+                                    msg.status === "mitarbeiter"
+                                    ?
+                                    "status warning"
+                                    :
+                                    "status success"
+                                }
+
+                            >
+
+                                {getStatusText(msg.status)}
+
+                            </div>
+
+                        }
+
+
+
+                        <p>
+
+                            {msg.text}
+
+                        </p>
+
+
+                    </div>
+
+
+                ))
+
+            }
+
 
         </div>
 
     );
 
 }
+
 
 export default ChatWindow;

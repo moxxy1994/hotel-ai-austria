@@ -2,41 +2,80 @@ const fs = require("fs");
 const path = require("path");
 
 
-function getHotelInformation(hotelId = "001") {
+function getHotelFile(hotelId) {
 
 
-    const filePath = path.join(
+    return path.join(
+
         __dirname,
+
         "../data",
+
         `hotel${hotelId}.json`
+
     );
 
-
-    console.log("-------------------------");
-    console.log("Gesuchte Datei:");
-    console.log(filePath);
-    console.log("-------------------------");
+}
 
 
 
-    if (!fs.existsSync(filePath)) {
+function getHotelInformation(hotelId) {
+
+
+    const filePath = getHotelFile(hotelId);
+
+
+
+    if(!fs.existsSync(filePath)){
+
 
         throw new Error(
-            "Datei existiert nicht"
+            "Hotel nicht gefunden: " + filePath
         );
+
 
     }
 
 
 
-    const hotelData = fs.readFileSync(
+    const data =
+        fs.readFileSync(
+            filePath,
+            "utf-8"
+        );
+
+
+
+    return JSON.parse(data);
+
+
+}
+
+
+
+function updateHotelInformation(hotelId, hotelData){
+
+
+    const filePath =
+        getHotelFile(hotelId);
+
+
+
+    fs.writeFileSync(
+
         filePath,
-        "utf-8"
+
+        JSON.stringify(
+            hotelData,
+            null,
+            2
+        )
+
     );
 
 
+    return hotelData;
 
-    return JSON.parse(hotelData);
 
 }
 
@@ -44,6 +83,10 @@ function getHotelInformation(hotelId = "001") {
 
 module.exports = {
 
-    getHotelInformation
+
+    getHotelInformation,
+
+    updateHotelInformation
+
 
 };

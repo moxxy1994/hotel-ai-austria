@@ -1,302 +1,223 @@
-body {
-
-  margin: 0;
-
-  font-family: Arial, sans-serif;
-
-  background: #eef2f7;
-
-  color: #222;
-
-}
-
-
-
-.container {
-
-  max-width: 1200px;
-
-  margin: 30px auto;
-
-  padding: 20px;
-
-}
-
-
-
-/* Header */
-
-header {
-
-  text-align: center;
-
-  margin-bottom: 30px;
-
-}
-
-
-header h1 {
-
-  font-size: 42px;
-
-  margin-bottom: 10px;
-
-}
-
-
-header p {
-
-  color: #666;
-
-  font-size: 18px;
-
-}
-
-
-
-/* Dashboard Layout */
-
-
-.dashboard {
-
-  display: grid;
-
-  grid-template-columns: 320px 1fr;
-
-  gap: 25px;
-
-}
-
-
-
-/* Karten */
-
-
-.card,
-.hotel-sidebar {
-
-  background: white;
-
-  padding: 25px;
-
-  border-radius: 15px;
-
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-
-}
-
-
-
-/* Hotel Sidebar */
-
-
-.hotel-sidebar h2 {
-
-  margin-top: 0;
-
-}
-
-
-
-.hotel-sidebar h3 {
-
-  margin-bottom: 5px;
-
-  color: #444;
-
-}
-
-
-.hotel-sidebar p {
-
-  margin-top: 5px;
-
-}
-
-
-
-/* Chat Bereich */
-
-
-.chat-area {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 20px;
-
-}
-
-
-
-/* Auswahl */
-
-
-select {
-
-  width: 100%;
-
-  padding: 12px;
-
-  margin-top: 10px;
-
-  font-size: 16px;
-
-  border-radius: 8px;
-
-  border: 1px solid #ccc;
-
-}
-
-
-
-/* Chat Fenster */
-
-
 .chat-window {
-
-  min-height: 350px;
-
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   max-height: 500px;
-
   overflow-y: auto;
-
-  padding: 10px;
-
 }
-
-
-
-/* Nachrichten */
-
 
 .message {
-
-  padding: 15px;
-
-  border-radius: 12px;
-
-  margin-bottom: 15px;
-
-  max-width: 80%;
-
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-
-
 
 .message.guest {
-
-  background: #e3f2fd;
-
-  margin-left: auto;
-
+  align-items: flex-end;
 }
-
-
 
 .message.ai {
-
-  background: #f1f1f1;
-
-  margin-right: auto;
-
+  align-items: flex-start;
 }
 
-
-
-.message p {
-
-  margin-bottom: 0;
-
+.message-content {
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  line-height: 1.5;
+  white-space: pre-wrap;
 }
 
-
-
-/* Eingabe */
-
-
-.message-input {
-
-  display: flex;
-
-  gap: 10px;
-
-}
-
-
-
-.message-input input {
-
-  flex: 1;
-
-  padding: 14px;
-
-  font-size: 16px;
-
-  border-radius: 8px;
-
-  border: 1px solid #ccc;
-
-}
-
-
-
-/* Button */
-
-
-button {
-
-  padding: 14px 22px;
-
-  font-size: 16px;
-
-  cursor: pointer;
-
-  border: none;
-
-  border-radius: 8px;
-
-  background: #1e88e5;
-
+.message.guest .message-content {
+  background: #2563eb;
   color: white;
+}
+
+.message.ai .message-content {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.copy-button {
+  background: #e5e7eb;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.copy-button:hover {
+  background: #d1d5db;
+}
+
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.quick-button {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 20px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.quick-button:hover {
+  background: #e5e7eb;
+}
+
+.export-button {
+  background: #059669;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.export-button:hover {
+  background: #047857;
+}
+
+.hotel-branding {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.hotel-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.message-category {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2563eb;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 4px 8px;
+  border-radius: 999px;
+  align-self: flex-start;
+}
+
+.category {
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+    color:#2563eb;
+
+}
+
+.status {
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
 
 }
 
 
 
-button:hover {
+.status.success {
 
-  opacity: 0.9;
-
-}
-
-
-
-/* alte Textareas behalten */
-
-
-textarea {
-
-  width: 100%;
-
-  box-sizing: border-box;
+    color:green;
 
 }
 
 
 
-/* Mobile Ansicht */
+.status.warning {
+
+    color:red;
+
+}
 
 
-@media(max-width: 800px) {
+
+.category {
+
+    font-weight:bold;
+
+    margin-bottom:5px;
+
+}
+
+.admin-panel {
+
+    margin-top:20px;
+
+}
 
 
-  .dashboard {
+.admin-panel h3 {
 
-    grid-template-columns: 1fr;
+    margin-bottom:5px;
 
-  }
+}
 
+
+.admin-panel p {
+
+    margin-top:0;
+
+}
+
+.admin-panel input {
+
+    width:100%;
+
+    padding:10px;
+
+    margin-top:5px;
+
+    margin-bottom:15px;
+
+    font-size:16px;
+
+}
+
+
+.admin-panel label {
+
+    font-weight:bold;
+
+    display:block;
+
+}
+
+
+.admin-panel button {
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:12px 20px;
 
 }

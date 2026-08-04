@@ -1,5 +1,6 @@
 {
   "hotelName": "City Hotel Wien",
+  "branding": { "logoText": "CW", "primaryColor": "#EA580C" },
   "description": "Modernes Stadthotel im Herzen von Wien.",
   "address": {
     "city": "Wien",

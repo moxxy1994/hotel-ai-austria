@@ -1,3 +1,5 @@
+const adminRoutes = require("./routes/adminRoutes");
+
 require("dotenv").config();
 
 const express = require("express");
@@ -20,6 +22,7 @@ app.use("/api/chat", chatRoutes);
 
 app.use("/api/hotels", hotelRoutes);
 
+app.use("/api/admin", adminRoutes);
 
 
 app.get("/", (req, res) => {

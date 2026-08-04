@@ -1,152 +1,66 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 
+function HotelSidebar({ hotelId }) {
+  const [hotel, setHotel] = useState(null);
 
-function HotelSidebar({hotelId}){
+  useEffect(() => {
+    async function loadHotel() {
+      const result = await fetch(`http://localhost:3000/api/hotels/${hotelId}`);
+      const data = await result.json();
+      setHotel(data);
+    }
 
+    loadHotel();
+  }, [hotelId]);
 
-const [hotel,setHotel]=useState(null);
+  if (!hotel || !hotel.address) {
+    return (
+      <aside className="hotel-sidebar">
+        <p>Hotelinformationen werden geladen...</p>
+      </aside>
+    );
+  }
 
+  return (
+    <aside className="hotel-sidebar">
+      <div className="hotel-branding">
+        <div
+          className="hotel-logo"
+          style={{ backgroundColor: hotel.branding?.primaryColor || "#2563EB" }}
+        >
+          {hotel.branding?.logoText || "HT"}
+        </div>
 
+        <div>
+          <h2>🏨 {hotel.hotelName}</h2>
+          <p>{hotel.description}</p>
+        </div>
+      </div>
 
-useEffect(()=>{
+      <hr />
 
+      <h3>📍 Standort</h3>
+      <p>{hotel.address.city}, {hotel.address.country}</p>
 
-async function loadHotel(){
+      <h3>🕒 Check-in</h3>
+      <p>{hotel.checkIn.time}</p>
 
+      <h3>🚪 Check-out</h3>
+      <p>{hotel.checkOut.time}</p>
 
-const result=await fetch(
+      <h3>🍳 Frühstück</h3>
+      <p>{hotel.breakfast.time}</p>
 
-`http://localhost:3000/api/hotels/${hotelId}`
+      <h3>🚗 Parkplatz</h3>
+      <p>{hotel.parking.information}</p>
 
-);
+      <h3>🐕 Haustiere</h3>
+      <p>{hotel.pets.allowed ? "✅ Erlaubt" : "❌ Nicht erlaubt"}</p>
 
-
-
-const data=await result.json();
-
-
-setHotel(data);
-
-
+      <h3>🧖 Wellness</h3>
+      <p>{hotel.wellness.openingHours}</p>
+    </aside>
+  );
 }
-
-
-loadHotel();
-
-
-
-},[hotelId]);
-
-
-
-
-if(!hotel){
-
-
-return(
-
-<aside className="hotel-sidebar">
-
-<p>
-Hotelinformationen werden geladen...
-</p>
-
-</aside>
-
-);
-
-}
-
-
-
-
-return(
-
-
-<aside className="hotel-sidebar">
-
-
-<h2>
-🏨 {hotel.hotelName}
-</h2>
-
-
-<p>
-{hotel.description}
-</p>
-
-
-<hr/>
-
-
-<h3>📍 Standort</h3>
-
-<p>
-{hotel.address.city}, {hotel.address.country}
-</p>
-
-
-
-<h3>🕒 Check-in</h3>
-
-<p>
-{hotel.checkIn.time}
-</p>
-
-
-
-<h3>🚪 Check-out</h3>
-
-<p>
-{hotel.checkOut.time}
-</p>
-
-
-
-<h3>🍳 Frühstück</h3>
-
-<p>
-{hotel.breakfast.time}
-</p>
-
-
-
-<h3>🚗 Parkplatz</h3>
-
-<p>
-{hotel.parking.information}
-</p>
-
-
-
-<h3>🐕 Haustiere</h3>
-
-<p>
-
-{hotel.pets.allowed
-?
-"✅ Erlaubt"
-:
-"❌ Nicht erlaubt"}
-
-</p>
-
-
-
-<h3>🧖 Wellness</h3>
-
-<p>
-{hotel.wellness.openingHours}
-</p>
-
-
-</aside>
-
-
-);
-
-
-}
-
 
 export default HotelSidebar;
