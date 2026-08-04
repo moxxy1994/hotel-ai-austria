@@ -1,0 +1,46 @@
+{
+  "hotelName": "City Hotel Wien",
+  "description": "Modernes Stadthotel im Herzen von Wien.",
+  "address": {
+    "city": "Wien",
+    "country": "Austria"
+  },
+  "contact": {
+    "phone": "+43 100 200300",
+    "email": "info@cityhotel-wien.at"
+  },
+  "checkIn": {
+    "time": "14:00 Uhr",
+    "earlyCheckIn": "Nach Anfrage möglich"
+  },
+  "checkOut": {
+    "time": "11:00 Uhr",
+    "lateCheckOut": "Bis 13:00 Uhr möglich"
+  },
+  "breakfast": {
+    "time": "06:30 - 10:30 Uhr",
+    "included": true
+  },
+  "parking": {
+    "available": true,
+    "information": "Tiefgarage vorhanden."
+  },
+  "pets": {
+    "allowed": false,
+    "price": "Nicht verfügbar"
+  },
+  "wellness": {
+    "available": false,
+    "openingHours": "Kein Wellnessbereich vorhanden"
+  },
+  "restaurant": {
+    "available": true,
+    "openingHours": "18:00 - 23:00 Uhr"
+  },
+  "languages": [
+    "Deutsch",
+    "Englisch",
+    "Ungarisch",
+    "Kroatisch"
+  ]
+}

@@ -1,19 +1,27 @@
 const aiService = require("../services/aiService");
 
 
+
 exports.generateResponse = async (req, res) => {
+
 
     try {
 
+
         const message = req.body.message;
-        const style = req.body.style;
+
+        const hotelId = req.body.hotelId || "001";
 
 
-        const answer =
-            await aiService.generateHotelResponse(
-                message,
-                style
-            );
+
+        const answer = await aiService.generateHotelResponse(
+
+            message,
+
+            hotelId
+
+        );
+
 
 
         res.json({
@@ -23,9 +31,12 @@ exports.generateResponse = async (req, res) => {
         });
 
 
+
     } catch(error) {
 
+
         console.error(error);
+
 
 
         res.status(500).json({
@@ -35,6 +46,8 @@ exports.generateResponse = async (req, res) => {
 
         });
 
+
     }
+
 
 };

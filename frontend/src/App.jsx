@@ -1,216 +1,211 @@
-import { useState } from "react";
+import {useState} from "react";
 
 import Header from "./components/Header";
 import ChatWindow from "./components/ChatWindow";
 import MessageInput from "./components/MessageInput";
 import HotelSidebar from "./components/HotelSidebar";
+import HotelSelector from "./components/HotelSelector";
 
 
-function App() {
+function App(){
 
 
-    const [message, setMessage] = useState("");
+const [message,setMessage]=useState("");
 
-    const [messages, setMessages] = useState([]);
+const [messages,setMessages]=useState([]);
 
-    const [style, setStyle] = useState("freundlich");
+const [style,setStyle]=useState("freundlich");
 
+const [hotelId,setHotelId]=useState("001");
 
 
-    async function sendMessage() {
 
+async function sendMessage(){
 
-        if (!message.trim()) {
-            return;
-        }
 
+if(!message.trim()) return;
 
 
-        const guestMessage = {
 
-            role: "guest",
+const result=await fetch(
 
-            text: message
+"http://localhost:3000/api/chat",
 
-        };
+{
 
+method:"POST",
 
+headers:{
 
-        setMessages((oldMessages) => [
+"Content-Type":"application/json"
 
-            ...oldMessages,
+},
 
-            guestMessage
+body:JSON.stringify({
 
-        ]);
+message:message,
 
+style:style,
 
+hotelId:hotelId
 
-        const result = await fetch(
+})
 
-            "http://localhost:3000/api/chat",
+}
 
-            {
+);
 
-                method: "POST",
 
 
-                headers: {
+const data=await result.json();
 
-                    "Content-Type": "application/json"
 
-                },
 
+setMessages(old=>[
 
-                body: JSON.stringify({
+...old,
 
-                    message: message,
+{
 
-                    style: style
+role:"ai",
 
-                })
+text:data.reply
 
-            }
+}
 
-        );
+]);
 
 
 
-        const data = await result.json();
+setMessage("");
 
+}
 
 
-        const aiMessage = {
 
-            role: "ai",
 
-            text: data.reply
+return(
 
-        };
+<div className="container">
 
 
+<Header/>
 
-        setMessages((oldMessages) => [
 
-            ...oldMessages,
+<div className="dashboard">
 
-            aiMessage
 
-        ]);
+<div>
 
 
+<HotelSelector
 
-        setMessage("");
+hotelId={hotelId}
 
-    }
+setHotelId={setHotelId}
 
+/>
 
 
-    return (
 
-        <div className="container">
+<HotelSidebar
 
+hotelId={hotelId}
 
-            <Header />
+/>
 
 
+</div>
 
-            <div className="dashboard">
 
 
-                <HotelSidebar />
+<div className="chat-area">
 
 
+<div className="card">
 
-                <div className="chat-area">
 
+<label>
 
+Antwortstil
 
-                    <div className="card">
+</label>
 
 
-                        <label>
+<select
 
-                            Antwortstil
+value={style}
 
-                        </label>
+onChange={(e)=>
 
+setStyle(e.target.value)
 
+}
 
-                        <select
+>
 
-                            value={style}
 
-                            onChange={(e) =>
-                                setStyle(e.target.value)
-                            }
+<option value="freundlich">
+😊 Freundlich
+</option>
 
-                        >
 
-                            <option value="freundlich">
-                                😊 Freundlich
-                            </option>
+<option value="elegant">
+🏨 Elegant
+</option>
 
 
-                            <option value="elegant">
-                                🏨 Elegant
-                            </option>
+<option value="luxus">
+⭐ Luxus
+</option>
 
 
-                            <option value="luxus">
-                                ⭐ Luxus
-                            </option>
+<option value="locker">
+😎 Locker
+</option>
 
 
-                            <option value="locker">
-                                😎 Locker
-                            </option>
+</select>
 
 
-                        </select>
+</div>
 
 
-                    </div>
+<div className="card">
 
 
+<ChatWindow
 
+messages={messages}
 
-                    <div className="card">
+/>
 
 
-                        <ChatWindow
 
-                            messages={messages}
+<MessageInput
 
-                        />
+message={message}
 
+setMessage={setMessage}
 
+sendMessage={sendMessage}
 
-                        <MessageInput
+/>
 
-                            message={message}
 
-                            setMessage={setMessage}
+</div>
 
-                            sendMessage={sendMessage}
 
-                        />
+</div>
 
 
-                    </div>
+</div>
 
 
+</div>
 
-                </div>
+);
 
-
-            </div>
-
-
-
-        </div>
-
-    );
 
 }
 

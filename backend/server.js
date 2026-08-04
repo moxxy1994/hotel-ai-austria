@@ -16,13 +16,7 @@ app.use(express.json());
 
 
 
-// Chat API
-
 app.use("/api/chat", chatRoutes);
-
-
-
-// Hotel API
 
 app.use("/api/hotels", hotelRoutes);
 
@@ -42,6 +36,8 @@ app.get("/", (req, res) => {
 
 app.listen(3000, () => {
 
-    console.log("Server läuft auf Port 3000");
+    console.log(
+        "Server läuft auf Port 3000"
+    );
 
 });

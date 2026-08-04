@@ -6,24 +6,28 @@ const hotelService = require("../services/hotelService");
 
 
 
-// Hotelinformationen laden
-
 router.get("/:hotelId", (req, res) => {
+
+
+    console.log(
+        "Hotel Anfrage:",
+        req.params.hotelId
+    );
+
 
 
     try {
 
 
-        const hotelId = req.params.hotelId;
+        const hotel = hotelService.getHotelInformation(
+
+            req.params.hotelId
+
+        );
 
 
 
-        const hotelInformation =
-            hotelService.getHotelInformation(hotelId);
-
-
-
-        res.json(hotelInformation);
+        res.json(hotel);
 
 
 
@@ -33,10 +37,9 @@ router.get("/:hotelId", (req, res) => {
         console.error(error);
 
 
-
         res.status(404).json({
 
-            message: "Hotel nicht gefunden"
+            error: error.message
 
         });
 

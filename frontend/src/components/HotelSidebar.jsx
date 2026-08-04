@@ -1,200 +1,150 @@
-import { useEffect, useState } from "react";
+import { useEffect,useState } from "react";
 
 
-function HotelSidebar() {
+function HotelSidebar({hotelId}){
 
 
-    const [hotel, setHotel] = useState(null);
+const [hotel,setHotel]=useState(null);
 
 
 
-    useEffect(() => {
+useEffect(()=>{
 
 
-        async function loadHotel() {
+async function loadHotel(){
 
 
-            const result = await fetch(
+const result=await fetch(
 
-                "http://localhost:3000/api/hotels/001"
+`http://localhost:3000/api/hotels/${hotelId}`
 
-            );
+);
 
 
-            const data = await result.json();
 
+const data=await result.json();
 
-            setHotel(data);
 
+setHotel(data);
 
-        }
 
+}
 
-        loadHotel();
 
+loadHotel();
 
-    }, []);
 
 
+},[hotelId]);
 
-    if (!hotel) {
 
 
-        return (
 
-            <aside className="hotel-sidebar">
+if(!hotel){
 
-                <p>
-                    Hotelinformationen werden geladen...
-                </p>
 
-            </aside>
+return(
 
-        );
+<aside className="hotel-sidebar">
 
-    }
+<p>
+Hotelinformationen werden geladen...
+</p>
 
+</aside>
 
+);
 
-    return (
+}
 
-        <aside className="hotel-sidebar">
 
 
-            <h2>
 
-                🏨 {hotel.hotelName}
+return(
 
-            </h2>
 
+<aside className="hotel-sidebar">
 
 
-            <p>
+<h2>
+🏨 {hotel.hotelName}
+</h2>
 
-                {hotel.description}
 
-            </p>
+<p>
+{hotel.description}
+</p>
 
 
+<hr/>
 
-            <hr />
 
+<h3>📍 Standort</h3>
 
+<p>
+{hotel.address.city}, {hotel.address.country}
+</p>
 
-            <h3>
 
-                📍 Standort
 
-            </h3>
+<h3>🕒 Check-in</h3>
 
+<p>
+{hotel.checkIn.time}
+</p>
 
-            <p>
 
-                {hotel.address.city}, {hotel.address.country}
 
-            </p>
+<h3>🚪 Check-out</h3>
 
+<p>
+{hotel.checkOut.time}
+</p>
 
 
-            <h3>
 
-                🕒 Check-in
+<h3>🍳 Frühstück</h3>
 
-            </h3>
+<p>
+{hotel.breakfast.time}
+</p>
 
 
-            <p>
 
-                Ab {hotel.checkIn.time}
+<h3>🚗 Parkplatz</h3>
 
-            </p>
+<p>
+{hotel.parking.information}
+</p>
 
 
 
-            <h3>
+<h3>🐕 Haustiere</h3>
 
-                🚪 Check-out
+<p>
 
-            </h3>
+{hotel.pets.allowed
+?
+"✅ Erlaubt"
+:
+"❌ Nicht erlaubt"}
 
+</p>
 
-            <p>
 
-                Bis {hotel.checkOut.time}
 
-            </p>
+<h3>🧖 Wellness</h3>
 
+<p>
+{hotel.wellness.openingHours}
+</p>
 
 
-            <h3>
+</aside>
 
-                🍳 Frühstück
 
-            </h3>
+);
 
-
-            <p>
-
-                {hotel.breakfast.time}
-
-            </p>
-
-
-
-            <h3>
-
-                🚗 Parkplatz
-
-            </h3>
-
-
-            <p>
-
-                {hotel.parking.available
-                    ? "✅ " + hotel.parking.information
-                    : "❌ Kein Parkplatz vorhanden"
-                }
-
-            </p>
-
-
-
-            <h3>
-
-                🐕 Haustiere
-
-            </h3>
-
-
-            <p>
-
-                {hotel.pets.allowed
-                    ? `✅ Erlaubt (${hotel.pets.price})`
-                    : "❌ Nicht erlaubt"
-                }
-
-            </p>
-
-
-
-            <h3>
-
-                🧖 Wellness
-
-            </h3>
-
-
-            <p>
-
-                {hotel.wellness.openingHours}
-
-            </p>
-
-
-
-        </aside>
-
-    );
 
 }
 

@@ -1,0 +1,46 @@
+{
+    "hotelName": "Bergblick Hotel Graz",
+    "description": "Komfortables Hotel mit Blick auf die Grazer Umgebung.",
+    "address": {
+        "city": "Graz",
+        "country": "Austria"
+    },
+    "contact": {
+        "phone": "+43 300 400500",
+        "email": "info@bergblick-graz.at"
+    },
+    "checkIn": {
+        "time": "15:00 Uhr",
+        "earlyCheckIn": "Nach Verfügbarkeit möglich"
+    },
+    "checkOut": {
+        "time": "10:30 Uhr",
+        "lateCheckOut": "Nach Anfrage möglich"
+    },
+    "breakfast": {
+        "time": "07:00 - 10:00 Uhr",
+        "included": true
+    },
+    "parking": {
+        "available": true,
+        "information": "Kostenlose Parkplätze beim Hotel."
+    },
+    "pets": {
+        "allowed": true,
+        "price": "10 Euro pro Nacht"
+    },
+    "wellness": {
+        "available": true,
+        "openingHours": "08:00 - 20:00 Uhr"
+    },
+    "restaurant": {
+        "available": true,
+        "openingHours": "17:30 - 22:00 Uhr"
+    },
+    "languages": [
+        "Deutsch",
+        "Englisch",
+        "Ungarisch",
+        "Kroatisch"
+    ]
+}
